@@ -19,7 +19,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .red
+        cv.backgroundColor = .white
         cv.dataSource = self
         cv.delegate = self
         // set CollectionView pageing feature
@@ -28,6 +28,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }()
     
     let cellId = "cellId"
+    
+    let pages: [Page] = {
+        let firstPage = Page(title: "Share a great listen", meesage: "It's free to send your books to the people in your life. Every recipient's first book is on us.", imageName: "image03")
+        
+        let secondPage = Page(title: "Send from your library", meesage: "Tap the More menu next to any book. Choose \"Send this Book\".", imageName: "image01")
+        
+        let thirdPage = Page(title: "Send from the player", meesage: "Tap the More menu in the upper corner. Choose \"Send this Book\".", imageName: "image02")
+        
+        
+        
+        return [firstPage, secondPage, thirdPage]
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +61,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return pages.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // create CollectionView's cell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
+        
+        let page = pages[indexPath.item]
+        
+        cell.page = page
         
         return cell
     }
@@ -82,7 +99,7 @@ extension UIView {
         }
         
         if let bottom = bottom {
-            bottomAnchor.constraint(equalTo: bottom, constant: bottomConstant).isActive = true
+            bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant).isActive = true
         }
         
         if let left = left {
@@ -90,7 +107,7 @@ extension UIView {
         }
         
         if let right = right {
-            rightAnchor.constraint(equalTo: right, constant: rightConstant).isActive = true
+            rightAnchor.constraint(equalTo: right, constant: -rightConstant).isActive = true
         }
     }
     

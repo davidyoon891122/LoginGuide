@@ -8,6 +8,33 @@
 import UIKit
 
 class PageCell: UICollectionViewCell {
+    var page: Page? {
+        didSet {
+            guard let page = page else {
+                return
+            }
+            
+            imageVeiw.image = UIImage(named: page.imageName)
+            
+            let color = UIColor(white: 0.2, alpha: 1)
+            
+            let attributedText = NSMutableAttributedString(string: page.title, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium),NSAttributedString.Key.foregroundColor: color])
+            
+            attributedText.append(NSAttributedString(string: "\n\n\(page.meesage)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: color]))
+            
+            //textView.text = page.title + "\n\n" + page.meesage
+            
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            
+            let length = attributedText.string.count
+            
+            attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: length))
+            
+            textView.attributedText = attributedText
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -23,11 +50,36 @@ class PageCell: UICollectionViewCell {
         return iv
     }()
     
+    
+    let textView: UITextView = {
+        let tv = UITextView()
+        tv.text = "Sample Text For Now"
+        tv.isEditable = false
+        tv.clipsToBounds = true
+        tv.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        return tv
+    }()
+    
+    let lineSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        return view
+    }()
+    
     func setupView() {
-        backgroundColor = .blue
         addSubview(imageVeiw)
+        addSubview(textView)
+        addSubview(lineSeparatorView)
         
-        imageVeiw.anchorToTop(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor)
+        imageVeiw.anchorToTop(top: topAnchor, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
+        
+        //textView.anchorToTop(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor)
+        textView.anchorWithConstantsToTop(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 16, bottomConstant: 0, rightConstant: 16)
+        
+        textView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
+        
+        lineSeparatorView.anchorToTop(top: nil, left: leftAnchor, bottom: textView.topAnchor, right: rightAnchor)
+        lineSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
     required init?(coder: NSCoder) {

@@ -15,6 +15,7 @@
 		AD15767B26AEF455001D99C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD15767A26AEF455001D99C3 /* Assets.xcassets */; };
 		AD15767E26AEF455001D99C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD15767C26AEF455001D99C3 /* LaunchScreen.storyboard */; };
 		AD15768626AEFCAD001D99C3 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15768526AEFCAD001D99C3 /* PageCell.swift */; };
+		AD25EE0026B03DC30013687D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25EDFF26B03DC30013687D /* Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AD15767D26AEF455001D99C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD15767F26AEF455001D99C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD15768526AEFCAD001D99C3 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		AD25EDFF26B03DC30013687D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				AD15767F26AEF455001D99C3 /* Info.plist */,
 				AD15767726AEF455001D99C3 /* LoginGuide.xcdatamodeld */,
 				AD15768526AEFCAD001D99C3 /* PageCell.swift */,
+				AD25EDFF26B03DC30013687D /* Page.swift */,
 			);
 			path = LoginGuide;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			files = (
 				AD15767326AEF455001D99C3 /* ViewController.swift in Sources */,
 				AD15768626AEFCAD001D99C3 /* PageCell.swift in Sources */,
+				AD25EE0026B03DC30013687D /* Page.swift in Sources */,
 				AD15766F26AEF455001D99C3 /* AppDelegate.swift in Sources */,
 				AD15767926AEF455001D99C3 /* LoginGuide.xcdatamodeld in Sources */,
 				AD15767126AEF455001D99C3 /* SceneDelegate.swift in Sources */,
