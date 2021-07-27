@@ -16,6 +16,7 @@
 		AD15767E26AEF455001D99C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD15767C26AEF455001D99C3 /* LaunchScreen.storyboard */; };
 		AD15768626AEFCAD001D99C3 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15768526AEFCAD001D99C3 /* PageCell.swift */; };
 		AD25EE0026B03DC30013687D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25EDFF26B03DC30013687D /* Page.swift */; };
+		AD25EE0226B052990013687D /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25EE0126B052990013687D /* Extenstions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		AD15767F26AEF455001D99C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD15768526AEFCAD001D99C3 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		AD25EDFF26B03DC30013687D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		AD25EE0126B052990013687D /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				AD15767726AEF455001D99C3 /* LoginGuide.xcdatamodeld */,
 				AD15768526AEFCAD001D99C3 /* PageCell.swift */,
 				AD25EDFF26B03DC30013687D /* Page.swift */,
+				AD25EE0126B052990013687D /* Extenstions.swift */,
 			);
 			path = LoginGuide;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			files = (
 				AD15767326AEF455001D99C3 /* ViewController.swift in Sources */,
 				AD15768626AEFCAD001D99C3 /* PageCell.swift in Sources */,
+				AD25EE0226B052990013687D /* Extenstions.swift in Sources */,
 				AD25EE0026B03DC30013687D /* Page.swift in Sources */,
 				AD15766F26AEF455001D99C3 /* AppDelegate.swift in Sources */,
 				AD15767926AEF455001D99C3 /* LoginGuide.xcdatamodeld in Sources */,
