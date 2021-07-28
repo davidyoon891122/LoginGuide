@@ -28,6 +28,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }()
     
     let cellId = "cellId"
+    let loginCellId = "loginCellId"
     
     let pages: [Page] = {
         let firstPage = Page(title: "Share a great listen", meesage: "It's free to send your books to the people in your life. Every recipient's first book is on us.", imageName: "image03")
@@ -88,18 +89,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // sample code for individual settings for view constains
         //collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         // regist CollectionViewCell (default)
+        //collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
+        
+        registerCell()
+    }
+    
+    func registerCell() {
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-        
-        
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: loginCellId)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pages.count
+        return pages.count + 1
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // create CollectionView's cell
+        
+        if indexPath.item == pages.count {
+            let loginCell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath)
+            return loginCell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PageCell
         
         let page = pages[indexPath.item]
