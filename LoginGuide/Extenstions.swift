@@ -23,16 +23,16 @@ extension UIView {
             anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))
         }
         
-        if let bottom = bottom {
-            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
-        }
-        
         if let left = left {
             anchors.append(leftAnchor.constraint(equalTo: left, constant: leftConstant))
         }
         
+        if let bottom = bottom {
+            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+        }
+        
         if let right = right {
-            anchors.append(rightAnchor.constraint(equalTo: right, constant: rightConstant))
+            anchors.append(rightAnchor.constraint(equalTo: right, constant: -rightConstant))
         }
         
         if widthConstant > 0 {
