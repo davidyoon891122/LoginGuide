@@ -115,23 +115,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         
         
-        nextButtonTopAnchor = nextButton.anchor(view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 40, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
+        nextButtonTopAnchor = nextButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
         
         
-        skipButtonTopAnchor = skipButton.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 40, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
+        skipButtonTopAnchor = skipButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
         
         
-        pageControlBottomAnchor = pageControl.anchor(nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 40)[1]
+        pageControlBottomAnchor = pageControl.anchor(nil, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 40)[1]
 
         
-        collectionView.anchorToTop(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        collectionView.anchorToTop(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         registerCell()
     }
     
     @objc func keyboardShow() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+            
+            let y: CGFloat = UIDevice.current.orientation.isLandscape ? -100: -50
+            
+            self.view.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: self.view.frame.height)
         }, completion: nil)
     }
     
@@ -162,9 +165,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             print("animate controls off screen")
             moveControlConstrainsOffScreen()
         }else {
-            pageControlBottomAnchor?.constant = -10
-            skipButtonTopAnchor?.constant = 40
-            nextButtonTopAnchor?.constant = 40
+            pageControlBottomAnchor?.constant = 0
+            skipButtonTopAnchor?.constant = 0
+            nextButtonTopAnchor?.constant = 0
         }
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -178,9 +181,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     fileprivate func moveControlConstrainsOffScreen() {
-        pageControlBottomAnchor?.constant = 40
-        skipButtonTopAnchor?.constant = -40
-        nextButtonTopAnchor?.constant = -40
+        pageControlBottomAnchor?.constant = 80
+        skipButtonTopAnchor?.constant = -80
+        nextButtonTopAnchor?.constant = -80
     }
     
     
@@ -216,7 +219,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
-
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        //print(UIDevice.current.orientation.isLandscape)
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+        let indexPath = IndexPath(item: pageControl.currentPage, section: 0)
+        
+        // scroll to indexPath after the rotation is going
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 
