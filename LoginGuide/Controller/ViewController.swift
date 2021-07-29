@@ -46,21 +46,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.numberOfPages = self.pages.count + 1
-        pc.currentPageIndicatorTintColor = UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1)
+        pc.currentPageIndicatorTintColor = UIColor(red: 255/255, green: 50/255, blue: 27/255, alpha: 1)
         return pc
     }()
     
     let skipButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Skip", for: .normal)
-        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor(red: 255/255, green: 50/255, blue: 27/255, alpha: 1), for: .normal)
         return button
     }()
     
     let nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Next", for: .normal)
-        button.setTitleColor(UIColor(red: 247/255, green: 154/255, blue: 27/255, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor(red: 255/255, green: 50/255, blue: 27/255, alpha: 1), for: .normal)
         return button
     }()
     
@@ -71,7 +71,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        observeKeyBoardNotification()
+        
         
         view.addSubview(collectionView)
         view.addSubview(pageControl)
@@ -92,6 +94,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.anchorToTop(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
         registerCell()
+    }
+    
+    @objc func keyboardShow() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: -50, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+    }
+    
+    @objc func keyboardHide() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        }, completion: nil)
+    }
+    
+    
+    fileprivate func observeKeyBoardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
     
     
@@ -124,7 +150,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     fileprivate func registerCell() {
         collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: loginCellId)
+        collectionView.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
