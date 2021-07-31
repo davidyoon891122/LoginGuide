@@ -7,23 +7,23 @@
 
 import UIKit
 
-class LoginController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+protocol LoginControllerDelegate: AnyObject {
+        func finishLoggingIn()
+}
 
+
+class LoginController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LoginControllerDelegate{
     
-    // create collection view with closure
-    // this is for drawing view without storyBoard
-    // set lazy for using self
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        //set CollectionViewFlowLayout direction from vertical to horizontal
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white
         cv.dataSource = self
         cv.delegate = self
-        // set CollectionView pageing feature
         cv.isPagingEnabled = true
+        
         return cv
     }()
     
@@ -92,8 +92,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         pageControl.currentPage += 1
         
-        
-        
     }
     
     
@@ -106,14 +104,11 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         super.viewDidLoad()
         
         observeKeyBoardNotification()
-        
-        
+    
         view.addSubview(collectionView)
         view.addSubview(pageControl)
         view.addSubview(skipButton)
         view.addSubview(nextButton)
-        
-        
         
         nextButtonTopAnchor = nextButton.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 80, heightConstant: 50).first
         
@@ -174,10 +169,6 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        
-        
-        print(pageNumber) // return x view's position
-        
     }
     
     fileprivate func moveControlConstrainsOffScreen() {
@@ -201,7 +192,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == pages.count {
-            let loginCell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath)
+            let loginCell = collectionView.dequeueReusableCell(withReuseIdentifier: loginCellId, for: indexPath) as! LoginCell
+            loginCell.delegate = self
             return loginCell
         }
         
@@ -214,6 +206,15 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
         return cell
     }
     
+    func finishLoggingIn() {
+        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
+        mainNavigationController.viewControllers = [HomeController()]
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     //set cell's size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height)
@@ -221,12 +222,10 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        //print(UIDevice.current.orientation.isLandscape)
         
         collectionView.collectionViewLayout.invalidateLayout()
         let indexPath = IndexPath(item: pageControl.currentPage, section: 0)
         
-        // scroll to indexPath after the rotation is going
         DispatchQueue.main.async {
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             self.collectionView.reloadData()

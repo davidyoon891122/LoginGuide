@@ -33,13 +33,20 @@ class LoginCell: UICollectionViewCell {
         return textField
     }()
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .lightGray
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
+    
+    weak var delegate: LoginControllerDelegate?
+    
+    @objc func handleLogin() {
+        delegate?.finishLoggingIn()
+    }
     
     
     
