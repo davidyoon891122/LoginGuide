@@ -207,7 +207,8 @@ class LoginController: UIViewController, UICollectionViewDataSource, UICollectio
     }
     
     func finishLoggingIn() {
-        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        let keyWindow = UIApplication.shared.windows.first {$0.isKeyWindow}
+        let rootViewController = keyWindow?.rootViewController
         guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
         mainNavigationController.viewControllers = [HomeController()]
         
