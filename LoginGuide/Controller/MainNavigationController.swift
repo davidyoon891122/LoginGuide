@@ -23,8 +23,7 @@ class MainNavigationController: UINavigationController {
     }
     
     fileprivate func isLoggedIn() -> Bool {
-        return false
-        
+        return UserDefaults.standard.isLoggedIn()
     }
     
     
@@ -37,12 +36,3 @@ class MainNavigationController: UINavigationController {
     }
 }
 
-
-class HomeController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .yellow
-        
-        navigationItem.title = "We're logged in"
-    }
-}

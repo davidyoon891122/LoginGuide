@@ -18,6 +18,8 @@
 		AD25EE0226B052990013687D /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD25EE0126B052990013687D /* Extenstions.swift */; };
 		AD32A50D26B2B19E00FA5144 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32A50C26B2B19E00FA5144 /* LoginCell.swift */; };
 		AD3DD8FD26B549F20003DDB3 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DD8FC26B549F20003DDB3 /* MainNavigationController.swift */; };
+		AD3DD8FF26B55D9C0003DDB3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DD8FE26B55D9C0003DDB3 /* HomeController.swift */; };
+		AD3DD90126B55F650003DDB3 /* UserDefault+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD3DD90026B55F650003DDB3 /* UserDefault+helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		AD25EE0126B052990013687D /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		AD32A50C26B2B19E00FA5144 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		AD3DD8FC26B549F20003DDB3 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		AD3DD8FE26B55D9C0003DDB3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		AD3DD90026B55F650003DDB3 /* UserDefault+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		AD15766D26AEF455001D99C3 /* LoginGuide */ = {
 			isa = PBXGroup;
 			children = (
+				AD3DD90026B55F650003DDB3 /* UserDefault+helpers.swift */,
 				AD32A50B26B2B12900FA5144 /* Models */,
 				AD32A50A26B2B0F500FA5144 /* Controller */,
 				AD32A50926B2B0C600FA5144 /* Views */,
@@ -94,6 +99,7 @@
 			children = (
 				AD15767226AEF455001D99C3 /* LoginController.swift */,
 				AD3DD8FC26B549F20003DDB3 /* MainNavigationController.swift */,
+				AD3DD8FE26B55D9C0003DDB3 /* HomeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -178,9 +184,11 @@
 			files = (
 				AD3DD8FD26B549F20003DDB3 /* MainNavigationController.swift in Sources */,
 				AD15767326AEF455001D99C3 /* LoginController.swift in Sources */,
+				AD3DD90126B55F650003DDB3 /* UserDefault+helpers.swift in Sources */,
 				AD15768626AEFCAD001D99C3 /* PageCell.swift in Sources */,
 				AD25EE0226B052990013687D /* Extenstions.swift in Sources */,
 				AD32A50D26B2B19E00FA5144 /* LoginCell.swift in Sources */,
+				AD3DD8FF26B55D9C0003DDB3 /* HomeController.swift in Sources */,
 				AD25EE0026B03DC30013687D /* Page.swift in Sources */,
 				AD15766F26AEF455001D99C3 /* AppDelegate.swift in Sources */,
 				AD15767926AEF455001D99C3 /* LoginGuide.xcdatamodeld in Sources */,
